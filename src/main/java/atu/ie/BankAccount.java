@@ -33,4 +33,18 @@ public class BankAccount {
     public double getBalance() {
         return balance;
     }
+
+    public double addDeposit(double amount){
+        balance += amount;
+        return balance;
+    }
+
+    public double withdraw(double amount){
+
+        if( amount > balance ){
+            throw new IllegalArgumentException("You can't withdraw more than balance, please try again ");
+        }
+        balance = balance - amount;
+        return balance;
+    }
 }
