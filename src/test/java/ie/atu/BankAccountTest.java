@@ -1,5 +1,6 @@
 package ie.atu;
 
+import atu.ie.BankAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,17 +16,18 @@ public class BankAccountTest {
         account = new BankAccount();
     }
 
+    @Test
     void constructorInitialisation(){
 
-        account = BankAccount("ACC12345", "Jose", 100);
-        assertEquals("ACC12345", account.getAccNO());
+        account = new BankAccount( "ACC12345", "Jose", 100);
+        assertEquals("ACC12345", account.getAccNo());
         assertEquals("Jose", account.getName());
         assertEquals(100, account.getBalance());
     }
 
     @Test
     void constructorNegativeInitialisation(){
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new BankACCount("ACC12345", "Jose", -100));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new BankAccount("ACC12345", "Jose", -100));
         assertEquals("Balance must be greater than 0", exception.getMessage());
     }
 }
