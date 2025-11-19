@@ -7,7 +7,6 @@ public class BankAccount {
     private String name;
     private double balance;
 
-
     public  BankAccount(String accNo, String name, double balance) {
     }
 }
