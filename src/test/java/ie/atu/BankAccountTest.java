@@ -45,6 +45,6 @@ public class BankAccountTest {
 
     @Test
     void withdraw(){
-        assertEquals(20, account.withdraw(20));
+        assertEquals(20, account.withdraw(-20));
     }
 }
