@@ -1,4 +1,6 @@
-package ie.atu;
+package atu.ie;
+import atu.ie.BankAccount;
+
 
 //Imports the class under test and JUnit 5 test annotations and assertions
 import atu.ie.BankAccount;
@@ -21,7 +23,7 @@ public class BankAccountTest {
     }
 
     //Verifies the constructor stores values correctly
-    //It gives them the default values?
+    //It gives them the default values
     @Test
     void constructorInitialisation(){
 
@@ -37,14 +39,41 @@ public class BankAccountTest {
         assertEquals("Balance must be greater than 0", exception.getMessage());
     }
 
-    //Calls instance method addDeposit on account
+    //The user adds 20 t0 the balance
     @Test
     void addDeposit(){
         assertEquals( 20, account.addDeposit(20));
     }
-
+    //The user can't add a negative amount
+    @Test
+    void addDepositNegative(){
+        assertThrows(IllegalArgumentException.class, () -> account.addDeposit(-20));
+    }
+    //The user can't add 0 to the amount
+    @Test
+    void addDeposit_WhenAmountIsZero(){
+        assertThrows(IllegalArgumentException.class, () -> account.addDeposit(0));
+    }
+    //Just withdrawing a regular positive amount greater than the balance or equal than the balance
     @Test
     void withdraw(){
-        assertEquals(20, account.withdraw(-20));
+        account =  new BankAccount("ACC12345", "Jose", 100);
+        assertEquals(80, account.withdraw(20));
+    }
+    //If the user tries to withdraw a negative amount it won't let him do it
+    @Test
+    void withdrawNegative(){
+        account = new BankAccount("ACC12345", "Jose", 100);
+        Exception e = assertThrows(IllegalArgumentException.class,
+                () -> account.withdraw(-20));
+        assertEquals("Amount must be greater than 0", e.getMessage());
+    }
+    //If the user tries to withdraw more than the balance it won't let him do it
+    @Test
+    void withdraw_WhenAmountIsZero(){
+        account = new BankAccount("ACC12345", "Jose", 100);
+        Exception e = assertThrows(IllegalArgumentException.class,
+                () -> account.withdraw(120));
+        assertEquals("You can't withdraw more than balance, please try again", e.getMessage());
     }
 }
